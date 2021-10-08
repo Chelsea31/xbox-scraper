@@ -6,6 +6,7 @@ from bs4 import BeautifulSoup
 amazon_urls = ["https://www.amazon.in/Xbox-Series-X/dp/B08J7QX1N1"]
 flipkart_urls = ["https://www.flipkart.com/microsoft-xbox-series-x-1024-gb/p/itm63ff9bd504f27"]
 reliance_url = ["https://www.reliancedigital.in/xbox-series-x-console-with-wireless-controller-1-tb/p/491934660"]
+croma_urls = ["https://www.croma.com/microsoft-xbox-one-x-1-tb-console-+-shadow-of-the-tomb-raider-bundle-cyv-00118-white-/p/215372"]
 user_agent_list = []
 
 
@@ -57,9 +58,20 @@ def check_reliance(url):
         return False
 
 
+def check_croma(url):
+    soup = getSoup(url)
+    button_list = list(soup.find_all("button", class_="pdp-add-to-cart"))
+    if button_list:
+        print("Found stock on Croma : " + url)
+        return True
+    else:
+        return False
+
+
 if __name__ == '__main__':
     create_header_list()
     result_rd = [check_reliance(url) for url in reliance_url]
     result_amazon = [check_amazon(url) for url in amazon_urls]
     result_flipkart = [check_flipkart(url) for url in flipkart_urls]
+    result_croma = [check_croma(url) for url in croma_urls]
     print("The end..")
