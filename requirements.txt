@@ -1,2 +1,5 @@
 requests==2.22.0
 beautifulsoup4~=4.9.3
+win10toast
+schedule==1.1.0
+time
